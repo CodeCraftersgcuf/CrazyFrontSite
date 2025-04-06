@@ -54,10 +54,14 @@ export const GamePage: React.FC = () => {
   }
 
   if (error || !data) {
+    console.log(error);
     return (
       <div className="text-red-500 text-center p-4">
-        <h2 className="text-xl font-bold mb-2">Error Loading Game</h2>
-        <p>{error instanceof Error ? error.message : 'Please try again later.'}</p>
+        <h2 className="text-xl font-bold mb-2">
+          Error Loading Game
+        </h2>
+        <p>Sorry, the game is currently under maintenance. Please try again later.</p>
+        {/* <p>{error instanceof Error ? error.message : 'Please try again later.'}</p> */}
       </div>
     );
   }
