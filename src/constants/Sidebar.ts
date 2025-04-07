@@ -8,6 +8,12 @@ export const top_Sidebar_links = [
       sublinks: [],
     },
     {
+      name: "Favorite ",
+      link: "/favorite",
+      icon: images.heart,
+      sublinks: [],
+    },
+    {
       name: "Multiplayer",
       link: "category/Multiplayer",
       icon: images.multiplayer,

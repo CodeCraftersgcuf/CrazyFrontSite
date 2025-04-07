@@ -84,7 +84,7 @@ export const GameCategoryPage: React.FC = () => {
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:bg-gray-300"
+            className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:bg-gray-800 cursor-pointer disabled:cursor-not-allowed"
           >
             Previous
           </button>
@@ -94,7 +94,7 @@ export const GameCategoryPage: React.FC = () => {
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:bg-gray-300"
+            className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:bg-gray-800 cursor-pointer disabled:cursor-not-allowed"
           >
             Next
           </button>

@@ -20,7 +20,8 @@ import stickman from '../assets/sidebar/Stickman.svg'
 import games from '../assets/sidebar/games.png' 
 import shuttle from '../assets/sidebar/shuttle.png'
 import battle from '../assets/sidebar/battle.png'
-import stars from '../assets/sidebar/christmas-stars.png' 
+import stars from '../assets/sidebar/christmas-stars.png'
+import heart from '../assets/sidebar/love.png' 
 
 // import hypercasual from '../assets/sidebar/'
 // import bejeweled from '../assets/sidebar/'
@@ -51,6 +52,7 @@ const images = {
     shuttle,
     battle,
     stars,
+    heart,
 }   
 
 

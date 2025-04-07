@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const Layout: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,12 +39,14 @@ const Layout: React.FC = () => {
 
               {/* login like etc */}
               <div className='flex items-center gap-2'>
-                <div className='w-10 h-10 rounded-full bg-[#373952] flex items-center justify-center'>
+                {/* <div className='w-10 h-10 rounded-full bg-[#373952] flex items-center justify-center'>
                   <i className="bi bi-people text-white"></i>
-                </div>
-                <div className='w-10 h-10 rounded-full bg-[#373952] flex items-center justify-center'>
-                  <i className="bi bi-heart text-white"></i>
-                </div>
+                </div> */}
+                <Link to={'/favorite'}>
+                  <div className='w-10 h-10 rounded-full bg-[#373952] flex items-center justify-center'>
+                    <i className="bi bi-heart text-white"></i>
+                  </div>
+                </Link>
                 <button className='bg-[#8668FF] text-white text-nowrap lg:text-wrap px-4 py-2 rounded-full hover:bg-[#8668FF]/80 transition duration-300 capitalize font-bold'>
                   Log in
                 </button>
