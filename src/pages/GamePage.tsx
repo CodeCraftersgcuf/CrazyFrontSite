@@ -8,8 +8,6 @@ import {
   HeartOff,
   Maximize2,
   Minimize2,
-  Keyboard,
-  Mouse,
   Info
 } from 'lucide-react';
 

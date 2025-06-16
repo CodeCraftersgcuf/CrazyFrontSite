@@ -4,10 +4,10 @@ import { Navigation, Pagination, Autoplay, Grid } from 'swiper/modules';
 import { Game } from '../data/types';
 import { GameCard } from './GameCard';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/grid';
+// import 'swiper/css';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+// import 'swiper/css/grid';
 
 interface GameSwiperProps {
   games: Game[];

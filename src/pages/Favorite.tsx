@@ -1,7 +1,6 @@
 import React from 'react'
 import { useFavorites } from '../queries/useFavorites'
 import { toast } from 'react-toastify';
-import { GameCard } from '../components/GameCard';
 import { Link } from 'react-router-dom';
 import { Gamepad2, Trash2Icon } from 'lucide-react';
 import { Game } from '../data/types';
