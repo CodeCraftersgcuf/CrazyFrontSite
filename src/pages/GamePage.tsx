@@ -60,7 +60,7 @@ export const GamePage: React.FC = () => {
         </h2>
         <p>Sorry, the game is currently under maintenance. Please try again later.</p>
         <div>
-          <p>{error.message || String(error)}</p>
+          <p>{error ? (error as Error).message : String(error)}</p>
         </div>
       </div>
     );
