@@ -5,7 +5,7 @@ import { Game } from '../data/types';
 
 export const useHomeData = (search: string = '') => {
   const fetchHomeData = async (): Promise<Game[]> => {
-    const response = await fetch('/src/data/home_data.json');
+    const response = await fetch('/data/home_data.json');
     
     if (!response.ok) {
       throw new Error(`Failed to fetch home data: ${response.statusText}`);
