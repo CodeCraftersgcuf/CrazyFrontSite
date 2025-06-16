@@ -3,14 +3,14 @@ import { Game } from '../data/types';
 
 export const useSingleGameData = (category: string, id: string) => {
   const fetchGameData = async (): Promise<{ game: Game; relatedGames: Game[] }> => {
-    const response = await fetch(`/data/categories/${category}Data.json`);
+    const response = await fetch(`/data/Categories/${category}Data.json`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch game data: ${response.statusText}`);
     }
 
     const data: Game[] = await response.json();
-    const game = data.find((g) => g.title === id);
+    const game = data.find((g) => g.id === id);
 
     if (!game) {
       throw new Error('Game not found');

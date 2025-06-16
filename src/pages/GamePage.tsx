@@ -59,7 +59,9 @@ export const GamePage: React.FC = () => {
           Error Loading Game
         </h2>
         <p>Sorry, the game is currently under maintenance. Please try again later.</p>
-        {/* <p>{error instanceof Error ? error.message : 'Please try again later.'}</p> */}
+        <div>
+          <p>{error.message || String(error)}</p>
+        </div>
       </div>
     );
   }

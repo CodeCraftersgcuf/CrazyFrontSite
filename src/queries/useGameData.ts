@@ -5,7 +5,7 @@ import { Game } from '../data/types';
 export const useGameData = (category: string, search: string, page: number) => {
   const fetchGameData = async (): Promise<Game[]> => {
     // Update the path to match your project structure
-    const response = await fetch(`/data/categories/${category}Data.json`);
+    const response = await fetch(`/data/Categories/${category}Data.json`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch game data: ${response.statusText}`);

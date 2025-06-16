@@ -82,8 +82,7 @@ const Home: React.FC = () => {
         return (
             <div className="text-red-500 text-center p-4">
                 <h2 className="text-xl font-bold mb-2">Error Loading Games</h2>
-                <p>{error instanceof Error ? error.message : 'Please try again later.'}</p>
-                <p className="text-sm mt-2">Make sure the JSON file exists at: /src/data/home_data.json</p>
+                <p>{error.message || String(error)}</p>
             </div>
         );
     }
