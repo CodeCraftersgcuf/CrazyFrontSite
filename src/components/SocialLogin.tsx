@@ -22,7 +22,6 @@ const SocialLogin: React.FC<SocialLoginProps> = ({ onLoginSuccess, onClose }) =>
   const [loading, setLoading] = useState<string>('');
   const [pendingCred, setPendingCred] = useState<AuthCredential | null>(null);
   const [pendingProvider, setPendingProvider] = useState<string>('');
-  const [pendingEmail, setPendingEmail] = useState<string>('');
 
   // Helper for account-exists-with-different-credential
   const handleAccountExistsWithDifferentCredential = async (
@@ -33,7 +32,6 @@ const SocialLogin: React.FC<SocialLoginProps> = ({ onLoginSuccess, onClose }) =>
     const credential = err.credential as AuthCredential;
     setPendingCred(credential);
     setPendingProvider(providerName);
-    setPendingEmail(email);
 
     if (email) {
       try {
@@ -109,7 +107,6 @@ const SocialLogin: React.FC<SocialLoginProps> = ({ onLoginSuccess, onClose }) =>
         setError('');
         setPendingCred(null);
         setPendingProvider('');
-        setPendingEmail('');
         // Optionally, update user info/UI here
         setUser(auth.currentUser);
         onLoginSuccess?.(auth.currentUser!);
@@ -224,3 +221,4 @@ const SocialLogin: React.FC<SocialLoginProps> = ({ onLoginSuccess, onClose }) =>
 };
 
 export default SocialLogin;
+ 

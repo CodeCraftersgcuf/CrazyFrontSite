@@ -5,7 +5,6 @@ import { Heart, X, LogOut, User as UserIcon } from 'lucide-react';
 import SocialLogin from '../components/SocialLogin';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
-import { useFavorites } from '../queries/useFavorites';
 
 const Layout: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -64,8 +63,6 @@ const Layout: React.FC = () => {
     console.log('Profile image failed to load'); // Debug log
     setImageError(true);
   };
-
-  const { isFavorite } = useFavorites();
 
   return (
     <>
@@ -213,4 +210,5 @@ const Layout: React.FC = () => {
   );
 };
 
-export default Layout;
+export default Layout; 
+ 

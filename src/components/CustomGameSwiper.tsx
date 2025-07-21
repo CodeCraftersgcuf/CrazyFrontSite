@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'; // Use Link if using React Router
 
 interface CustomGameSwiperProps {
   games: Game[];
-  layout?: 'grid' | 'list' | 'featured';
   slidesPerView?: number;
   spaceBetween?: number;
   autoplay?: boolean;
@@ -14,7 +13,6 @@ interface CustomGameSwiperProps {
 
 export const CustomGameSwiper: React.FC<CustomGameSwiperProps> = ({
   games,
-  layout = 'grid',
   slidesPerView = 4,
   spaceBetween = 20,
   autoplay = false,
@@ -220,3 +218,4 @@ export const CustomGameSwiper: React.FC<CustomGameSwiperProps> = ({
     </div>
   );
 };
+ 

@@ -184,7 +184,6 @@ export const useFavorites = (user?: User | null) => {
   };
 
   const removeAllFavorites = async () => {
-    const previousFavorites = [...favorites];
     setFavorites([]);
     console.log('Removing all favorites');
 
