@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSingleGameData } from '../queries/useSingleGameData';
 import { useFavorites } from '../queries/useFavorites';
+import { auth } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import {
   Gamepad2,
@@ -13,10 +15,11 @@ import {
 
 export const GamePage: React.FC = () => {
   const { category = '', id = '' } = useParams();
+  const [user] = useAuthState(auth);
   // Decode the URL parameter and handle both ID and title matching
   const decodedId = decodeURIComponent(id);
   const { data, isLoading, error } = useSingleGameData(category, decodedId);
-  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites(user);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
 

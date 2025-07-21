@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Game } from '../data/types';
-import { GameCard } from './GameCard';
+import { Link } from 'react-router-dom'; // Use Link if using React Router
 
 interface CustomGameSwiperProps {
   games: Game[];
@@ -23,7 +23,7 @@ export const CustomGameSwiper: React.FC<CustomGameSwiperProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(slidesPerView);
   const containerRef = useRef<HTMLDivElement>(null);
-  const autoplayRef = useRef<number | null>(null);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Responsive breakpoints
   useEffect(() => {
@@ -109,27 +109,23 @@ export const CustomGameSwiper: React.FC<CustomGameSwiperProps> = ({
       {/* Navigation Buttons */}
       {totalSlides > 1 && (
         <>
-          <button
-            onClick={prevSlide}
-            disabled={currentIndex === 0}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-all duration-200 ${
-              currentIndex === 0 ? 'opacity-50 cursor-not-allowed' : 'opacity-75 hover:opacity-100'
-            }`}
-            style={{ transform: 'translate(-50%, -50%)' }}
-          >
-            <ChevronLeft size={20} />
-          </button>
+          {currentIndex > 0 && (
+            <button
+              onClick={prevSlide}
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-all duration-200 opacity-75 hover:opacity-100"
+            >
+              <ChevronLeft size={20} />
+            </button>
+          )}
           
-          <button
-            onClick={nextSlide}
-            disabled={currentIndex === totalSlides - 1}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-all duration-200 ${
-              currentIndex === totalSlides - 1 ? 'opacity-50 cursor-not-allowed' : 'opacity-75 hover:opacity-100'
-            }`}
-            style={{ transform: 'translate(50%, -50%)' }}
-          >
-            <ChevronRight size={20} />
-          </button>
+          {currentIndex < totalSlides - 1 && (
+            <button
+              onClick={nextSlide}
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-all duration-200 opacity-75 hover:opacity-100"
+            >
+              <ChevronRight size={20} />
+            </button>
+          )}
         </>
       )}
 
@@ -164,11 +160,35 @@ export const CustomGameSwiper: React.FC<CustomGameSwiperProps> = ({
                 >
                   {slideGames.map((game, gameIndex) => (
                     <div key={`${slideIndex}-${gameIndex}`} className="p-2">
-                      <GameCard game={game} layout={layout} />
+                      <Link
+                        to={`/category/${encodeURIComponent(game.category)}/${encodeURIComponent(game.title)}`}
+                        className="block group cursor-pointer"
+                        title={game.title}
+                      >
+                        <div className="bg-gray-900 rounded-lg shadow-lg overflow-hidden flex flex-col items-center justify-center p-2 h-full min-h-[180px] 
+                          transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl group-hover:border-blue-500 border border-transparent">
+                          {game.thumb ? (
+                            <img
+                              src={game.thumb}
+                              alt={game.title}
+                              className="w-full h-32 object-cover rounded-md mb-2 bg-gray-700 transition-all duration-300 group-hover:opacity-80"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src =
+                                  'https://via.placeholder.com/300x200?text=No+Image';
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-32 bg-gray-700 flex items-center justify-center text-gray-400">
+                              No Image
+                            </div>
+                          )}
+                          <h3 className="text-white text-center text-sm font-semibold group-hover:text-blue-400 transition-all">
+                            {game.title}
+                          </h3>
+                        </div>
+                      </Link>
                     </div>
                   ))}
-                  
-                  {/* Fill empty slots if needed */}
                   {slideGames.length < itemsPerSlide &&
                     Array.from({ length: itemsPerSlide - slideGames.length }).map((_, emptyIndex) => (
                       <div key={`empty-${slideIndex}-${emptyIndex}`} className="p-2" />

@@ -4,9 +4,12 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { Gamepad2, Trash2Icon } from 'lucide-react';
 import { Game } from '../data/types';
+import { auth } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Favorite: React.FC = () => {
-  const { favorites, removeAllFavorites, removeFavorite } = useFavorites();
+  const [user] = useAuthState(auth);
+  const { favorites, removeAllFavorites, removeFavorite } = useFavorites(user);
   const handleRemoveAll = () => {
     removeAllFavorites();
     toast.success('All favorites removed successfully!');
