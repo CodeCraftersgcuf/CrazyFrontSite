@@ -122,7 +122,9 @@ const Home: React.FC = () => {
                             games={gamesInCategory}
                             layout="list"
                             slidesPerView={4}
-                            spaceBetween={20}
+                            spaceBetween={16}
+                            autoplay={false}
+                            rows={1}
                         />
                     </div>
                 );

@@ -13,7 +13,9 @@ import {
 
 export const GamePage: React.FC = () => {
   const { category = '', id = '' } = useParams();
-  const { data, isLoading, error } = useSingleGameData(category, id);
+  // Decode the URL parameter in case it contains encoded characters
+  const decodedId = decodeURIComponent(id);
+  const { data, isLoading, error } = useSingleGameData(category, decodedId);
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
@@ -52,7 +54,8 @@ export const GamePage: React.FC = () => {
   }
 
   if (error || !data) {
-    console.log(error);
+    console.log('Error details:', error);
+    console.log('Category:', category, 'ID/Title:', decodedId);
     return (
       <div className="text-red-500 text-center p-4">
         <h2 className="text-xl font-bold mb-2">
