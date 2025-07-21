@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Heart } from 'lucide-react';
 
 const Layout: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const isFavoritePage = location.pathname === "/favorite";
+
   return (
     <>
       <div className="lg:flex bg-[#0C0D14]">
@@ -26,7 +30,6 @@ const Layout: React.FC = () => {
                   <i className="bi bi-list text-white text-4xl"></i>
                 </button>
                 <h1 className='font-medium text-sm lg:text-xl text-white'>Crazy Gaming</h1>
-                {/* <Agents agents={Topbar_profile_Left} /> */}
               </div>
 
               {/* search bar */}
@@ -39,22 +42,25 @@ const Layout: React.FC = () => {
 
               {/* login like etc */}
               <div className='flex items-center gap-2'>
-                {/* <div className='w-10 h-10 rounded-full bg-[#373952] flex items-center justify-center'>
-                  <i className="bi bi-people text-white"></i>
-                </div> */}
                 <Link to={'/favorite'}>
                   <div className='w-10 h-10 rounded-full bg-[#373952] flex items-center justify-center'>
-                    <i className="bi bi-heart text-white"></i>
+                    <Heart 
+                      size={24}
+                      fill="currentColor"
+                      className={`transition-all duration-200 ${
+                        isFavoritePage
+                          ? 'fill-purple-600 text-purple-600 scale-110'
+                          : 'text-gray-300 hover:text-purple-400'
+                      }`}
+                    />
                   </div>
                 </Link>
                 <button className='bg-[#8668FF] text-white text-nowrap lg:text-wrap px-4 py-2 rounded-full hover:bg-[#8668FF]/80 transition duration-300 capitalize font-bold'>
                   Log in
                 </button>
               </div>
-
             </div>
             <div className="p-8 text-white">
-              {/* <span className='text-red-500 lg:text-yellow-500'>hello world</span> */}
               <Outlet />
             </div>
           </div>

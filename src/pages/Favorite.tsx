@@ -19,20 +19,22 @@ const Favorite: React.FC = () => {
     <div className='flex flex-col gap-6'>
       <div className='flex items-center justify-between'>
         <h2 className='text-2xl font-bold'>Favorite</h2>
-        <button
-          onClick={handleRemoveAll}
-          className='bg-[#7159D6] py-2 px-8 rounded-full hover:bg-[#7159D6]/80 text-white transition-colors duration-300 flex items-center gap-2 cursor-pointer'
-        >
-          <Trash2Icon size={18}  color='white'  />
-          Remove All
-        </button>
+        {favorites.length > 0 && (
+          <button
+            onClick={handleRemoveAll}
+            className='bg-[#7159D6] py-2 px-8 rounded-full hover:bg-[#7159D6]/80 text-white transition-colors duration-300 flex items-center gap-2 cursor-pointer'
+          >
+            <Trash2Icon size={18} color='white' />
+            Remove All
+          </button>
+        )}
       </div>
-      {favorites.length < 1 &&  <h1 className='text-center text-xl'>No Game Found</h1>}
+      {favorites.length < 1 && <h1 className='text-center text-xl'>No Game Found</h1>}
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4'>
         {
           favorites.length > 0 && (
-            favorites.map((favorite, index) => (
-              <div key={index}
+            favorites.map((favorite) => (
+              <div key={favorite.id}
                 className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 flex gap-4 h-[150px]`}>
                 <div
                   className={`

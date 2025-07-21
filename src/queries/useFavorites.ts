@@ -12,9 +12,12 @@ export const useFavorites = () => {
   }, []);
 
   const addFavorite = (game: Game) => {
-    const newFavorites = [...favorites, game];
-    setFavorites(newFavorites);
-    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    // Prevent duplicate favorites
+    if (!favorites.some((fav) => fav.id === game.id)) {
+      const newFavorites = [...favorites, game];
+      setFavorites(newFavorites);
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    }
   };
 
   const removeFavorite = (gameId: string) => {

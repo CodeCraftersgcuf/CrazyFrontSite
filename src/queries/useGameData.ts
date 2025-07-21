@@ -4,11 +4,12 @@ import { Game } from '../data/types';
 
 export const useGameData = (category: string, search: string, page: number) => {
   const fetchGameData = async (): Promise<Game[]> => {
-    // Update the path to match your project structure
-    const response = await fetch(`/data/Categories/${category}Data.json`);
+    // Handle category names with spaces by replacing spaces with empty string for file names
+    const categoryFileName = category.replace(/\s+/g, '');
+    const response = await fetch(`/data/Categories/${categoryFileName}Data.json`);
     
     if (!response.ok) {
-      throw new Error(`Failed to fetch game data: ${response.statusText}`);
+      throw new Error(`Failed to fetch game data: ${response.statusText} (${response.status})`);
     }
     
     const contentType = response.headers.get("content-type");
