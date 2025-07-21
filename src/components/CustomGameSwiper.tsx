@@ -23,7 +23,7 @@ export const CustomGameSwiper: React.FC<CustomGameSwiperProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(slidesPerView);
   const containerRef = useRef<HTMLDivElement>(null);
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const autoplayRef = useRef<number | null>(null);
 
   // Responsive breakpoints
   useEffect(() => {

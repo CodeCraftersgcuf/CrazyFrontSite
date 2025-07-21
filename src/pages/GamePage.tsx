@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import {
   Gamepad2,
   Heart,
-  HeartOff,
   Maximize2,
   Minimize2,
   Info
@@ -227,3 +226,4 @@ export const GamePage: React.FC = () => {
     </div>
   );
 };
+
