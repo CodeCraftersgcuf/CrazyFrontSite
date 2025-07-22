@@ -64,8 +64,7 @@ const Home: React.FC = () => {
             // Push the current game object into the array for its category
             accumulator[category].push(currentGame);
 
-            // Return the accumulator for the next iteration
-            return accumulator;
+             return accumulator;
         }, {} as Record<string, Game[]>); // Initialize the accumulator as an empty object with explicit type
     }
     const groupedData = useMemo(() => {
