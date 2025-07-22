@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useHomeData } from './HomePage';
-import { Game } from '../data/types';
 
 export const useGameSearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
