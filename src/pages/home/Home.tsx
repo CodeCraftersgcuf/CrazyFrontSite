@@ -1,14 +1,17 @@
-import React, { useMemo } from 'react'; // Import useMemo
+import React, { useMemo } from 'react';
 import images from '../../constants/images'
 import StaticCard from './components/StaticCard'
 import { Game } from '../../data/types'
 import { GameSwiper } from '../../components/GameSwiper'
 import { useHomeData } from '../../queries/HomePage'
 import HomePage from './components/HomePage'
+import SearchBar from '../../components/SearchBar'
+import { useGameSearch } from '../../queries/useGameSearch'
+import { GameCard } from '../../components/GameCard'
 import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
-    // const [search, setSearch] = useState('');
+    const { searchQuery, searchResults, hasResults } = useGameSearch();
 
     const statics = [
         {
@@ -28,8 +31,9 @@ const Home: React.FC = () => {
             img: images.stars
         },
     ]
+    
     const { games, isLoading, error } = useHomeData('');
-    console.log(games);
+
     function groupGamesByCategory(gamesArray: Game[]): Record<string, Game[]> {
         // Input validation
         if (!Array.isArray(gamesArray)) {
@@ -87,28 +91,88 @@ const Home: React.FC = () => {
         );
     }
 
+    // Show search results if user is searching
+    if (searchQuery.trim() && hasResults) {
+        return (
+            <div className='flex flex-col gap-6'>
+                <div className="mb-6">
+                    <SearchBar 
+                        placeholder="Search games..." 
+                        className="w-full"
+                        showDropdown={false}
+                    />
+                </div>
+                
+                <div>
+                    <h2 className='text-2xl font-bold mb-4'>
+                        Search Results for "{searchQuery}" ({searchResults.length} found)
+                    </h2>
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4'>
+                        {searchResults.map((game) => (
+                            <GameCard 
+                                key={game.id} 
+                                game={game} 
+                                layout="grid" 
+                                size="small" 
+                            />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Show "no results" if searching but no results found
+    if (searchQuery.trim() && !hasResults) {
+        return (
+            <div className='flex flex-col gap-6'>
+                <div className="mb-6">
+                    <SearchBar 
+                        placeholder="Search games..." 
+                        className="w-full"
+                        showDropdown={false}
+                    />
+                </div>
+                
+                <div className="text-center py-12">
+                    <h2 className='text-2xl font-bold mb-4'>No Games Found</h2>
+                    <p className="text-gray-400 mb-6">
+                        No games found for "{searchQuery}". Try searching with different keywords.
+                    </p>
+                    <button 
+                        onClick={() => window.location.reload()}
+                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                    >
+                        Browse All Games
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    // Default home page content
     return (
         <div className='flex flex-col gap-4'>
-            {/* <div className="mb-6">
-                <input
-                    type="text"
-                    placeholder="Search games..."
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+            <div className="mb-6 lg:hidden">
+                <SearchBar 
+                    placeholder="Search games..." 
+                    className="w-full"
                 />
-            </div> */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
-                {
-                    statics.map((item, index) => (
-                        <StaticCard key={index} title={item.title} img={item.img} />
-                    ))
-                }
             </div>
-            <div className='my-8'><HomePage firstFive={games} /></div>
+            
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8'>
+                {statics.map((item, index) => (
+                    <StaticCard key={index} title={item.title} img={item.img} />
+                ))}
+            </div>
+            
+            <div className='my-8'>
+                <HomePage firstFive={games} />
+            </div>
+            
             {Object.entries(groupedData).map(([categoryName, gamesInCategory]) => {
                 if (gamesInCategory.length === 0) {
-                    return null; // Don't render a section for empty categories
+                    return null;
                 }
                 return (
                     <div key={categoryName} style={{ marginBottom: '30px' }}>

@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Heart, X, LogOut, User as UserIcon } from 'lucide-react';
 import SocialLogin from '../components/SocialLogin';
+import SearchBar from '../components/SearchBar';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
 
@@ -89,11 +90,11 @@ const Layout: React.FC = () => {
               </div>
 
               {/* search bar */}
-              <div className='SearchBar relative hidden lg:hidden'>
-                <input type="text" placeholder="Search" className='bg-[#373952] text-white py-2 outline-none border-none px-4 pr-8 rounded-full min-w-[400px]' />
-                <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                  <i className="bi bi-search text-white"></i>
-                </button>
+              <div className='SearchBar relative hidden lg:block'>
+                <SearchBar 
+                  placeholder="Search games..." 
+                  className="min-w-[400px]"
+                />
               </div>
 
               {/* login like etc */}
@@ -182,6 +183,12 @@ const Layout: React.FC = () => {
                 )}
               </div>
             </div>
+            
+            {/* Mobile Search Bar */}
+            <div className="lg:hidden p-4 bg-[#1F2030]">
+              <SearchBar placeholder="Search games..." />
+            </div>
+            
             <div className="p-8 text-white">
               <Outlet />
             </div>
@@ -210,5 +217,4 @@ const Layout: React.FC = () => {
   );
 };
 
-export default Layout; 
- 
+export default Layout;
